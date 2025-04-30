@@ -16,7 +16,9 @@
       </div>
       <div class="main-nav">
         <ul>
-
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -430,3 +432,23 @@ window.addEventListener('resize', () => {
     filterItems("all");
 });
  
+
+// Services
+const servicesSlider = document.querySelector('.services-slider');
+let serviceScrollAmount = 0;
+
+setInterval(() => {
+  if (!servicesSlider) return;
+
+  const maxScroll = servicesSlider.scrollWidth - servicesSlider.clientWidth;
+
+  serviceScrollAmount = (serviceScrollAmount >= maxScroll) ? 0 : serviceScrollAmount + 320;
+
+  servicesSlider.scrollTo({
+    left: serviceScrollAmount,
+    behavior: 'smooth'
+  });
+}, 3000);
+
+
+</script>
