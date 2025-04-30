@@ -3,24 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cleaning Master</title>
+  <title>Arrow Laundry</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <nav class="navbar">
     <div class="container navbar-container">
       <div class="logo">
-        <img src="assets/logo/logo.png" href="#"></img>
+        <img src="assets/logo/logo.png" alt="Cleaning Master Logo">
       </div>
-      <div class="main-nav">
+      <div class="main-nav" id="main-nav">
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </nav>
   
@@ -29,15 +33,15 @@
  <section class="hero" id="hero">
     <div class="slider">
       <div class="progress-container">
-        <div class="progress-bar"></div>
+        <div class="progress-bar" id="progress-bar"></div>
       </div>
       <div class="slides">
         <img src="assets/slider/slider_1.png" alt="Slide 1" class="slide active" />
         <img src="assets/slider/slider_2.png" alt="Slide 2" class="slide" />
         <img src="assets/slider/slider_3.png" alt="Slide 3" class="slide" />
       </div>
-      <button class="prev">&#10094;</button> <!-- ← kiri -->
-      <button class="next">&#10095;</button> <!-- → kanan -->
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
     </div>
   </section>
   
@@ -56,7 +60,7 @@
         <img src="assets/slider/tes.png" class="img-small" alt="Image Small">
         <div class="opening-hours-box">
           <h4><span style="color: #0056cc;">OPENING</span> HOURS</h4>
-          <Img src="assets/logo/logo.png"></Img>
+          <Img src="assets/logo/logo.png" alt="Logo"></Img>
           <p>Monday - Friday 9am - 10pm</p>
           <p>Sunday Closed</p>
           <p>Saturday Closed</p>
@@ -70,7 +74,7 @@
     <div class="cta-container container">
       <div class="cta-left">
         <h3>
-          WE WOULD LIKE TO INTRODUCE OURSELVES AS A RELIABLE AND <br>
+          WE WOULD LIKE TO INTRODUCE OURSELVES AS A RELIABLE AND 
           <span class="highlight-blue">PROFESSIONAL CLEANING COMPANY.</span>
         </h3>
         <p>
@@ -99,18 +103,18 @@
       <p>We value your time and always arrive as scheduled.</p>
     </div>
     <div class="icon-box">
-        <i class="fas fa-shield-alt"></i>
-        <h3>Secure & Safe</h3>
-        <p>Your security is our top priority with trusted professionals.</p>
-      </div>
-      <div class="icon-box">
-        <i class="fas fa-clock"></i>
-        <h3>On Time</h3>
-        <p>We value your time and always arrive as scheduled.</p>
-      </div>
+      <i class="fas fa-shield-alt"></i>
+      <h3>Secure & Safe</h3>
+      <p>Your security is our top priority with trusted professionals.</p>
+    </div>
+    <div class="icon-box">
+      <i class="fas fa-clock"></i>
+      <h3>On Time</h3>
+      <p>We value your time and always arrive as scheduled.</p>
+    </div>
   </section>
 
-<!-- SERVICEES LAUNDRY -->
+<!-- SERVICES LAUNDRY -->
   <section id="services-slider" class="services-slider-section">
     <div class="container">
       <div class="section-title">
@@ -141,7 +145,7 @@
 
         <div class="service-box">
           <div class="img-wrap">
-            <img src="assets/slider/pohon.jpg" alt="Service 1">
+            <img src="assets/slider/pohon.jpg" alt="Service 3">
             <div class="view-details">VIEW DETAILS</div>
           </div>
           <div class="service-content">
@@ -152,7 +156,7 @@
   
         <div class="service-box">
           <div class="img-wrap">
-            <img src="assets/slider/pohon.jpg" alt="Service 2">
+            <img src="assets/slider/pohon.jpg" alt="Service 4">
             <div class="view-details">VIEW DETAILS</div>
           </div>
           <div class="service-content">
@@ -163,7 +167,7 @@
 
         <div class="service-box">
           <div class="img-wrap">
-            <img src="assets/slider/pohon.jpg" alt="Service 1">
+            <img src="assets/slider/pohon.jpg" alt="Service 5">
             <div class="view-details">VIEW DETAILS</div>
           </div>
           <div class="service-content">
@@ -174,7 +178,7 @@
   
         <div class="service-box">
           <div class="img-wrap">
-            <img src="assets/slider/pohon.jpg" alt="Service 2">
+            <img src="assets/slider/pohon.jpg" alt="Service 6">
             <div class="view-details">VIEW DETAILS</div>
           </div>
           <div class="service-content">
@@ -185,7 +189,7 @@
 
         <div class="service-box">
           <div class="img-wrap">
-            <img src="assets/slider/pohon.jpg" alt="Service 1">
+            <img src="assets/slider/pohon.jpg" alt="Service 7">
             <div class="view-details">VIEW DETAILS</div>
           </div>
           <div class="service-content">
@@ -196,7 +200,7 @@
   
         <div class="service-box">
           <div class="img-wrap">
-            <img src="assets/slider/pohon.jpg" alt="Service 2">
+            <img src="assets/slider/pohon.jpg" alt="Service 8">
             <div class="view-details">VIEW DETAILS</div>
           </div>
           <div class="service-content">
@@ -204,15 +208,13 @@
             <p>Etiam ultrices dui ut feugiat tristique. Aenean imperdiet diam condimentum purus tincidunt volutpat.</p>
           </div>
         </div>
-  
-        <!-- Tambahkan lebih banyak .service-box sesuai kebutuhan -->
       </div>
     </div>
   </section>
   
 
 
-<!-- PORTOFOLIO WEBSITE  -->
+<!-- PORTFOLIO WEBSITE  -->
   <section id="portfolio" class="portfolio-section">
     <div class="container">
       <div class="section-header">
@@ -252,203 +254,114 @@
     </div>
   </section>
   
-
-  
   
 <!-- TESTIMONIAL SECTION -->
 <section class="testimonial-section">
-    <div class="testimonial-wrapper">
+    <div class="container">
       <h2 class="testimonial-title">WHAT OUR <span class="highlight-blue">CLIENT SAYS</span></h2>
-      <div class="testimonial-slider" id="testimonial-slider">
-        <!-- Testimonial Items -->
-        <!-- Ulangi div berikut sebanyak 10 kali dengan konten berbeda -->
-        <div class="testimonial-item">
-          <h4>JOSI WELLEAM</h4>
-          <p class="position">Founder, GitGat</p>
-          <div class="stars">⭐⭐⭐⭐☆</div>
-          <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+      <div class="testimonial-wrapper">
+        <div class="testimonial-slider" id="testimonial-slider">
+          <!-- Testimonial Items -->
+          <div class="testimonial-item">
+            <h4>JOSI WELLEAM</h4>
+            <p class="position">Founder, GitGat</p>
+            <div class="stars">⭐⭐⭐⭐☆</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>MARIA JOHNSON</h4>
+            <p class="position">CEO, TechHub</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>JOHN SMITH</h4>
+            <p class="position">Manager, CleanCo</p>
+            <div class="stars">⭐⭐⭐⭐☆</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>SARAH WILLIAMS</h4>
+            <p class="position">Director, CleanSpot</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>MICHAEL BROWN</h4>
+            <p class="position">Owner, BrightClean</p>
+            <div class="stars">⭐⭐⭐⭐☆</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>AMANDA GARCIA</h4>
+            <p class="position">Manager, SpotFree</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>DAVID TAYLOR</h4>
+            <p class="position">CEO, CleanPro</p>
+            <div class="stars">⭐⭐⭐⭐☆</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>EMILY MARTINEZ</h4>
+            <p class="position">Founder, SparkleClean</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>ROBERT JONES</h4>
+            <p class="position">Director, ShineTime</p>
+            <div class="stars">⭐⭐⭐⭐☆</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
+          <div class="testimonial-item">
+            <h4>LISA ADAMS</h4>
+            <p class="position">Owner, FreshSpace</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
+          </div>
         </div>
-        <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-          <div class="testimonial-item">
-            <h4>JOSI WELLEAM</h4>
-            <p class="position">Founder, GitGat</p>
-            <div class="stars">⭐⭐⭐⭐☆</div>
-            <p class="desc">Donec malesuada interdum malesuada. Cras placerat fermentum feugiat...</p>
-          </div>
-        <!-- Tambahkan 9 testimonial-item lainnya di sini -->
+        <div class="testimonial-controls">
+          <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+          <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
       </div>
     </div>
   </section>
   
 
-
   <!-- FOOTER -->
   <footer class="footer" id="contact">
-    <p>&copy; 2025 Cleaning Master. All rights reserved.</p>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="assets/logo/logo.png" alt="Cleaning Master Logo">
+          <p>Professional cleaning services for your home and office.</p>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-phone"></i> 1-244-12-3456</p>
+          <p><i class="fas fa-envelope"></i> info@cleaningmaster.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Clean Street, Sparkle City</p>
+        </div>
+        <div class="footer-social">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Cleaning Master. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
-
-<script>
-// Hero
-  let slideIndex = 0;
-  const slides = document.querySelector(".slides");
-  const totalSlides = document.querySelectorAll(".slide").length;
-  const progressBar = document.querySelector(".progress-bar");
-
-  function showSlide(index) {
-    slideIndex = (index + totalSlides) % totalSlides;
-    slides.style.transform = `translateX(-${slideIndex * 100}vw)`;
-  }
-
-  function resetProgressBar() {
-    progressBar.style.animation = "none";
-    progressBar.offsetHeight; // trigger reflow
-    progressBar.style.animation = null;
-    progressBar.style.animation = "fill 5s linear forwards";
-  }
-
-  document.querySelector(".next").addEventListener("click", () => {
-    showSlide(slideIndex + 1);
-    resetProgressBar();
-  });
-
-  document.querySelector(".prev").addEventListener("click", () => {
-    showSlide(slideIndex - 1);
-    resetProgressBar();
-  });
-
-  // Auto slide setiap 5 detik
-  setInterval(() => {
-    showSlide(slideIndex + 1);
-    resetProgressBar();
-  }, 5000);
-
-  
-  const testimonialSlider = document.getElementById('testimonial-slider');
-const testimonials = document.querySelectorAll('.testimonial-item');
-let testimonialIndex = 0;
-
-function getItemsPerView() {
-  if (window.innerWidth <= 600) return 1;
-  if (window.innerWidth <= 991) return 2;
-  return 3;
-}
-
-function slideTestimonials() {
-  const itemsPerView = getItemsPerView();
-  const totalItems = testimonials.length;
-  const maxIndex = totalItems - itemsPerView;
-
-  testimonialIndex = (testimonialIndex + 1) % (maxIndex + 1);
-  const itemWidth = testimonials[0].offsetWidth + 20; // width + gap
-  const shift = testimonialIndex * itemWidth;
-
-  testimonialSlider.style.transform = `translateX(-${shift}px)`;
-}
-
-setInterval(slideTestimonials, 4000);
-
-window.addEventListener('resize', () => {
-  testimonialIndex = 0;
-  testimonialSlider.style.transform = `translateX(0px)`;
-});
-
-
-  // PORTOFOLIO
-  document.addEventListener("DOMContentLoaded", function () {
-    const tabs = document.querySelectorAll(".tab");
-    const items = document.querySelectorAll(".portfolio-item");
-
-    function filterItems(category) {
-        items.forEach(item => {
-            if (category === "all" || item.classList.contains(category)) {
-                item.style.display = "block";
-            } else {
-                item.style.display = "none";
-            }
-        });
-    }
-
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            document.querySelector(".tab.active").classList.remove("active");
-            tab.classList.add("active");
-
-            const filter = tab.getAttribute("data-filter");
-            filterItems(filter);
-        });
-    });
-
-    // Default: tampilkan semua
-    filterItems("all");
-});
- 
-
-// Services
-const servicesSlider = document.querySelector('.services-slider');
-let serviceScrollAmount = 0;
-
-setInterval(() => {
-  if (!servicesSlider) return;
-
-  const maxScroll = servicesSlider.scrollWidth - servicesSlider.clientWidth;
-
-  serviceScrollAmount = (serviceScrollAmount >= maxScroll) ? 0 : serviceScrollAmount + 320;
-
-  servicesSlider.scrollTo({
-    left: serviceScrollAmount,
-    behavior: 'smooth'
-  });
-}, 3000);
-
-
-</script>
