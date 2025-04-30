@@ -1,6 +1,6 @@
 /* =================== GENERAL =================== */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.6;
@@ -29,6 +29,7 @@ img {
 .navbar {
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-size: 20px; /* atau ukuran sesuai keinginan */
   padding: 15px 0;
   position: sticky;
   top: 0;
@@ -49,14 +50,14 @@ img {
 .main-nav ul {
   list-style: none;
   display: flex;
-  gap: 25px;
+  gap: 40px;
   margin: 0;
   padding: 0;
 }
 
 .main-nav ul li a {
-  color: #333;
-  font-weight: 500;
+  color: #00ac03;
+  font-weight: bold; /* Ganti dari 500 ke bold */
   text-decoration: none;
   transition: all 0.3s ease;
   padding: 8px 12px;
@@ -64,7 +65,7 @@ img {
 }
 
 .main-nav ul li a:hover {
-  background-color: #2b6777;
+  background-color: #00ac03;
   color: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transform: translateY(-1px);
@@ -411,6 +412,105 @@ img {
 
 .portfolio-item img:hover {
   transform: scale(1.05);
+}
+
+
+/* Services */
+.services-slider-section {
+  padding: 30px 0;
+  background: #fff;
+}
+
+.section-title h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.services-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+.service-box {
+  min-width: 300px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #eee;
+  scroll-snap-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.service-box:hover {
+  transform: translateY(-10px);
+}
+
+.img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+@media (max-width: 768px) {
+  .service-box {
+    min-width: 240px;
+    max-width: 240px;
+  }
+
+  .img-wrap {
+    height: 160px;
+  }
+
+  .service-content h4 {
+    font-size: 16px;
+  }
+
+  .service-content p {
+    font-size: 13px;
+  }
+
+  .view-details {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-box {
+    min-width: 200px;
+    max-width: 200px;
+  }
+
+  .img-wrap {
+    height: 140px;
+  }
+
+  .service-content h4 {
+    font-size: 15px;
+  }
+
+  .service-content p {
+    font-size: 12px;
+  }
+
+  .view-details {
+    font-size: 10px;
+    padding: 6px;
+  }
 }
 
 
