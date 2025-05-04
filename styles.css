@@ -147,7 +147,7 @@ img {
 
 .progress-bar {
   height: 100%;
-  background-color: #00ff40;
+  background-color: #000000;
   animation: fill 5s linear forwards;
 }
 
