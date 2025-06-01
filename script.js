@@ -9,87 +9,77 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   
-    // ======== HERO SLIDER ========
-    const slides = document.querySelectorAll('.slide');
+    // ======== HERO SLIDER INFINITE ========
+    const slidesContainer = document.querySelector('.slides');
+    const slideImages = document.querySelectorAll('.slides .slide');
     const progressBar = document.getElementById('progress-bar');
     const prevBtn = document.querySelector('.prev');
     const nextBtn = document.querySelector('.next');
-    let currentSlide = 0;
+
+    let currentIndex = 1; // karena kita mulai dari slide kedua (asli pertama)
     let slideInterval;
-  
-    // Initialize hero slider if slides exist
-    if(slides.length > 0) {
-      initializeSlider();
-    }
-  
-    function initializeSlider() {
-      // Show the first slide
-      slides[currentSlide].classList.add('active');
-      
-      // Previous button functionality
-      prevBtn.addEventListener('click', () => {
-        resetProgressBarAnimation();
-        prevSlide();
-      });
-      
-      // Next button functionality
-      nextBtn.addEventListener('click', () => {
-        resetProgressBarAnimation();
-        nextSlide();
-      });
-      
-      // Auto slide 
-      startSlideInterval();
-    }
-  
-    function nextSlide() {
-      // Hide current slide
-      slides[currentSlide].classList.remove('active');
-      
-      // Increment current slide and wrap around if needed
-      currentSlide = (currentSlide + 1) % slides.length;
-      
-      // Show the new current slide
-      slides[currentSlide].classList.add('active');
-      updateSliderPosition();
-    }
-  
-    function prevSlide() {
-      // Hide current slide
-      slides[currentSlide].classList.remove('active');
-      
-      // Decrement current slide and wrap around if needed
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      
-      // Show the new current slide
-      slides[currentSlide].classList.add('active');
-      updateSliderPosition();
-    }
-  
-    function updateSliderPosition() {
-      const slidesContainer = document.querySelector('.slides');
-      if (slidesContainer) {
-        slidesContainer.style.transform = `translateX(-${currentSlide * 100}vw)`;
+    let slideWidth = slideImages[0].clientWidth;
+
+    function goToSlide(index, animate = true) {
+      if (!animate) {
+        slidesContainer.style.transition = 'none';
+      } else {
+        slidesContainer.style.transition = 'transform 0.5s ease-in-out';
       }
+      slidesContainer.style.transform = `translateX(-${index * slideWidth}px)`;
     }
-  
-    function resetProgressBarAnimation() {
-      if(progressBar) {
+
+    function nextSlide() {
+      currentIndex++;
+      goToSlide(currentIndex);
+      resetProgressBar();
+    }
+
+    function prevSlide() {
+      currentIndex--;
+      goToSlide(currentIndex);
+      resetProgressBar();
+    }
+
+    function resetProgressBar() {
+      if (progressBar) {
         progressBar.style.animation = 'none';
-        void progressBar.offsetWidth; // Force reflow
+        void progressBar.offsetWidth; // force reflow
         progressBar.style.animation = 'fill 5s linear forwards';
       }
     }
-  
-    function startSlideInterval() {
-      // Clear any existing interval
+
+    function startAutoSlide() {
       clearInterval(slideInterval);
-      
-      // Set a new interval
       slideInterval = setInterval(() => {
-        resetProgressBarAnimation();
         nextSlide();
       }, 5000);
+    }
+
+    slidesContainer.addEventListener('transitionend', () => {
+      // Looping seamless
+      if (currentIndex === 0) {
+        currentIndex = slideImages.length - 2;
+        goToSlide(currentIndex, false);
+      } else if (currentIndex === slideImages.length - 1) {
+        currentIndex = 1;
+        goToSlide(currentIndex, false);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      slideWidth = slideImages[0].clientWidth;
+      goToSlide(currentIndex, false);
+    });
+
+    if (slideImages.length >= 3) {
+      goToSlide(currentIndex, false);
+      startAutoSlide();
+    }
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', nextSlide);
     }
   
     // ======== SERVICES POPUP MODAL ========
@@ -358,108 +348,70 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
     });
-    
-    // ======== TESTIMONIAL SLIDER ========
-    const testimonialSlider = document.getElementById('testimonial-slider');
-    const testimonialItems = document.querySelectorAll('.testimonial-item');
-    const testimonialPrev = document.querySelector('.testimonial-prev');
-    const testimonialNext = document.querySelector('.testimonial-next');
-    let testimonialPosition = 0;
-    let testimonialInterval;
-    
-    if(testimonialSlider && testimonialItems.length > 0) {
-      // Calculate how many items to show based on window width
-      const calculateVisibleItems = () => {
-        if (window.innerWidth >= 992) {
-          return 3; // Show 3 items on large screens
-        } else if (window.innerWidth >= 768) {
-          return 2; // Show 2 items on medium screens
-        } else {
-          return 1; // Show 1 item on small screens
-        }
-      };
-      
-      let visibleItems = calculateVisibleItems();
-      
-      // Update on window resize
-      window.addEventListener('resize', () => {
-        visibleItems = calculateVisibleItems();
-        moveTestimonialSlider();
-      });
-      
-      // Set initial item width and show first items
-      const updateItemWidth = () => {
-        const containerWidth = testimonialSlider.parentElement.offsetWidth;
-        const itemWidth = containerWidth / visibleItems;
-        
-        testimonialItems.forEach(item => {
-          item.style.flex = `0 0 ${itemWidth}px`;
-          item.style.maxWidth = `${itemWidth}px`;
-        });
-      };
-      
-      updateItemWidth();
-      window.addEventListener('resize', updateItemWidth);
-      
-      // Move slider function
-      const moveTestimonialSlider = () => {
-        const containerWidth = testimonialSlider.parentElement.offsetWidth;
-        const itemWidth = containerWidth / visibleItems;
-        testimonialSlider.style.transform = `translateX(-${testimonialPosition * itemWidth}px)`;
-      };
-      
-      // Next testimonial
-      const nextTestimonial = () => {
-        if (testimonialPosition >= testimonialItems.length - visibleItems) {
-          testimonialPosition = 0;
-        } else {
-          testimonialPosition++;
-        }
-        moveTestimonialSlider();
-      };
-      
-      // Previous testimonial
-      const prevTestimonial = () => {
-        if (testimonialPosition <= 0) {
-          testimonialPosition = testimonialItems.length - visibleItems;
-        } else {
-          testimonialPosition--;
-        }
-        moveTestimonialSlider();
-      };
-      
-      // Button event listeners
-      testimonialNext.addEventListener('click', () => {
-        nextTestimonial();
-        resetTestimonialInterval();
-      });
-      
-      testimonialPrev.addEventListener('click', () => {
-        prevTestimonial();
-        resetTestimonialInterval();
-      });
-      
-      // Auto slide testimonials
-      const startTestimonialInterval = () => {
-        testimonialInterval = setInterval(nextTestimonial, 4000);
-      };
-      
-      const resetTestimonialInterval = () => {
-        clearInterval(testimonialInterval);
-        startTestimonialInterval();
-      };
-      
-      // Start auto sliding
-      startTestimonialInterval();
-      
-      // Pause auto slide on hover
-      testimonialSlider.parentElement.addEventListener('mouseenter', () => {
-        clearInterval(testimonialInterval);
-      });
-      
-      testimonialSlider.parentElement.addEventListener('mouseleave', () => {
-        startTestimonialInterval();
-      });
-    }
-  
-})
+// ======== TESTIMONIAL SLIDER MANUAL + AUTO SCROLL ========
+const testimonialSlider = document.getElementById('testimonial-slider');
+let isDraggingTesti = false;
+let startXTesti, scrollLeftTesti;
+let testiAutoScrollInterval;
+
+if (testimonialSlider) {
+  // Manual drag mouse
+  testimonialSlider.addEventListener('mousedown', (e) => {
+    isDraggingTesti = true;
+    startXTesti = e.pageX - testimonialSlider.offsetLeft;
+    scrollLeftTesti = testimonialSlider.scrollLeft;
+    clearInterval(testiAutoScrollInterval);
+  });
+
+  testimonialSlider.addEventListener('mouseleave', () => {
+    isDraggingTesti = false;
+    startAutoScrollTestimonial();
+  });
+
+  testimonialSlider.addEventListener('mouseup', () => {
+    isDraggingTesti = false;
+    startAutoScrollTestimonial();
+  });
+
+  testimonialSlider.addEventListener('mousemove', (e) => {
+    if (!isDraggingTesti) return;
+    e.preventDefault();
+    const x = e.pageX - testimonialSlider.offsetLeft;
+    const walk = (x - startXTesti) * 2;
+    testimonialSlider.scrollLeft = scrollLeftTesti - walk;
+  });
+
+  // Touch (mobile)
+  testimonialSlider.addEventListener('touchstart', (e) => {
+    isDraggingTesti = true;
+    startXTesti = e.touches[0].pageX - testimonialSlider.offsetLeft;
+    scrollLeftTesti = testimonialSlider.scrollLeft;
+    clearInterval(testiAutoScrollInterval);
+  });
+
+  testimonialSlider.addEventListener('touchend', () => {
+    isDraggingTesti = false;
+    startAutoScrollTestimonial();
+  });
+
+  testimonialSlider.addEventListener('touchmove', (e) => {
+    if (!isDraggingTesti) return;
+    const x = e.touches[0].pageX - testimonialSlider.offsetLeft;
+    const walk = (x - startXTesti) * 2;
+    testimonialSlider.scrollLeft = scrollLeftTesti - walk;
+  });
+
+  // Auto scroll testimonial
+  function startAutoScrollTestimonial() {
+    clearInterval(testiAutoScrollInterval);
+    testiAutoScrollInterval = setInterval(() => {
+      testimonialSlider.scrollLeft += 320;
+
+      if (testimonialSlider.scrollLeft >= testimonialSlider.scrollWidth - testimonialSlider.clientWidth - 10) {
+        testimonialSlider.scrollLeft = 0;
+      }
+    }, 4000);
+  }
+
+  startAutoScrollTestimonial();
+}})
