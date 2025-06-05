@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const slidesContainer = document.querySelector('.slides');
     const slideImages = document.querySelectorAll('.slides .slide');
     const progressBar = document.getElementById('progress-bar');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
+    
 
     let currentIndex = 1; // karena kita mulai dari slide kedua (asli pertama)
     let slideInterval;
@@ -77,11 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
       startAutoSlide();
     }
 
-    if (prevBtn && nextBtn) {
-      prevBtn.addEventListener('click', prevSlide);
-      nextBtn.addEventListener('click', nextSlide);
-    }
-  
     // ======== SERVICES POPUP MODAL ========
     const serviceDetails = [
       {

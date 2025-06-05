@@ -114,27 +114,6 @@ img {
   object-fit: cover;
 }
 
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  z-index: 10;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.prev { left: 20px; }
-.next { right: 20px; }
-
 .progress-container {
   position: absolute;
   top: 0;
