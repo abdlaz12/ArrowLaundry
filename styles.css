@@ -242,20 +242,25 @@ img {
 
 /* =================== ICON BOXES =================== */
 .icon-boxes {
-  padding: 60px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* tengah di desktop */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 kotak sejajar di desktop */
   gap: 20px;
+  justify-items: center;
+  padding: 60px 0;
 }
 
 .icon-box {
-  flex: 1 1 300px;
-  max-width: 320px;
-  text-align: center;
   background: #f2f2f2;
+  border-radius: 12px;
   padding: 20px;
-  border-radius: 10px;
+  text-align: center;
+  width: 100%;          /* penuh dalam grid cell */
+  max-width: 160px;     /* ukuran kotak maksimal */
+  aspect-ratio: 1/1;    /* bikin kotak 1:1 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.3s ease;
 }
 
@@ -265,29 +270,46 @@ img {
 }
 
 .icon-box i {
-  font-size: 24px;
-  color: #2b6777;
+  font-size: 30px;
   margin-bottom: 10px;
+  color: #00ac03;
 }
 
-/* Responsif di HP */
+.icon-box h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.icon-box p {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Responsif di hp */
 @media (max-width: 768px) {
   .icon-boxes {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: repeat(2, 1fr); /* 2x2 saat di HP */
   }
 
   .icon-box {
-    flex: 1 1 100%;
-    max-width: 90%;
-    padding: 15px;
+    max-width: 140px;
+    aspect-ratio: 1/1;
   }
 
   .icon-box i {
-    font-size: 20px;
-    margin-bottom: 8px;
+    font-size: 24px;
+  }
+
+  .icon-box h3 {
+    font-size: 13px;
+  }
+
+  .icon-box p {
+    font-size: 11px;
   }
 }
+
 
 /* =================== SERVICES SECTION =================== */
 .services-slider-section {
@@ -672,6 +694,35 @@ img {
   font-size: 14px;
   color: #aaa;
 }
+
+/* Email Section */
+#subscribe-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+#subscribe-form input {
+  padding: 10px;
+  flex: 1;
+  border-radius: 5px;
+  border: none;
+}
+
+#subscribe-form button {
+  background-color: #00ac03;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#subscribe-form button:hover {
+  background-color: #008d02;
+}
+
 
 /* RESPONSIVE STYLES */
 @media (max-width: 992px) {
