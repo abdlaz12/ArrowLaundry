@@ -246,13 +246,13 @@ img {
   grid-template-columns: repeat(4, 1fr); /* 4 kotak sejajar di desktop */
   gap: 20px;
   justify-items: center;
-  padding: 60px 0;
+  padding: 40px 0;
 }
 
 .icon-box {
   background: #f2f2f2;
   border-radius: 12px;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   width: 100%;          /* penuh dalam grid cell */
   max-width: 160px;     /* ukuran kotak maksimal */
