@@ -408,4 +408,19 @@ if (testimonialSlider) {
   }
 
   startAutoScrollTestimonial();
+
+emailjs.init("ED_If7aLg-65o9uvo"); // Ganti dengan Public Key kamu
+
+document.getElementById('subscribe-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  emailjs.sendForm('service_wwud6ct', 'template_tv2dtt9', this)
+    .then(() => {
+      document.getElementById('subscribe-status').innerText = "Check your inbox! We sent you a confirmation.";
+    }, (error) => {
+      document.getElementById('subscribe-status').innerText = "Failed to send email: " + error.text;
+    });
+
+  this.reset();
+});
 }})
