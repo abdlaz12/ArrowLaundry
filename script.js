@@ -408,19 +408,30 @@ if (testimonialSlider) {
   }
 
   startAutoScrollTestimonial();
+}
+emailjs.init("ED_If7aLg-65o9uvo"); // PUBLIC KEY kamu
 
-emailjs.init("ED_If7aLg-65o9uvo"); // Ganti dengan Public Key kamu
+const subscribeForm = document.getElementById('subscribe-form');
+if (subscribeForm) {
+  subscribeForm.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-document.getElementById('subscribe-form').addEventListener('submit', function(e) {
-  e.preventDefault();
+    emailjs.sendForm('service_wwud6ct', 'template_tv2dtt9', this)
+      .then(() => {
+        console.log("✅ Email sent successfully.");
+        const statusEl = document.getElementById('subscribe-status');
+        statusEl.innerText = "✅ Check your inbox! We sent you a confirmation.";
+        statusEl.classList.remove('subscribe-error');
+        statusEl.classList.add('subscribe-success');
+      }, (error) => {
+        console.error("❌ Email send error:", error);
+        const statusEl = document.getElementById('subscribe-status');
+        statusEl.innerText = "❌ Failed to send email: " + error.text;
+        statusEl.classList.remove('subscribe-success');
+        statusEl.classList.add('subscribe-error');
+      });
 
-  emailjs.sendForm('service_wwud6ct', 'template_tv2dtt9', this)
-    .then(() => {
-      document.getElementById('subscribe-status').innerText = "Check your inbox! We sent you a confirmation.";
-    }, (error) => {
-      document.getElementById('subscribe-status').innerText = "Failed to send email: " + error.text;
-    });
-
-  this.reset();
-});
-}})
+    this.reset();
+  });
+}
+})

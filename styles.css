@@ -808,3 +808,15 @@ img {
     padding: 0 20px;
   }
 }
+
+/* Untuk pesan sukses */
+.subscribe-success {
+  color: #00ac03; /* hijau */
+  font-weight: bold;
+}
+
+/* Untuk pesan error */
+.subscribe-error {
+  color: #dc3545; /* merah */
+  font-weight: bold;
+}
