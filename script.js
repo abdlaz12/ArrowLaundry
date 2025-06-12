@@ -9,33 +9,36 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   
-    // ======== HERO SLIDER INFINITE ========
+    // ======== HERO SLIDER INFINITE - FIXED VERSION ========
     const slidesContainer = document.querySelector('.slides');
     const slideImages = document.querySelectorAll('.slides .slide');
     const progressBar = document.getElementById('progress-bar');
-    
 
     let currentIndex = 1; // karena kita mulai dari slide kedua (asli pertama)
     let slideInterval;
     let slideWidth = slideImages[0].clientWidth;
+    let isTransitioning = false; // Prevent multiple transitions
 
     function goToSlide(index, animate = true) {
+      if (isTransitioning && animate) return;
+      
       if (!animate) {
         slidesContainer.style.transition = 'none';
       } else {
         slidesContainer.style.transition = 'transform 0.5s ease-in-out';
+        isTransitioning = true;
       }
+      
       slidesContainer.style.transform = `translateX(-${index * slideWidth}px)`;
+      
+      if (!animate) {
+        isTransitioning = false;
+      }
     }
 
     function nextSlide() {
+      if (isTransitioning) return; // Prevent multiple calls during transition
       currentIndex++;
-      goToSlide(currentIndex);
-      resetProgressBar();
-    }
-
-    function prevSlide() {
-      currentIndex--;
       goToSlide(currentIndex);
       resetProgressBar();
     }
@@ -43,7 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function resetProgressBar() {
       if (progressBar) {
         progressBar.style.animation = 'none';
-        void progressBar.offsetWidth; // force reflow
+        // Force reflow
+        progressBar.offsetHeight;
         progressBar.style.animation = 'fill 5s linear forwards';
       }
     }
@@ -51,31 +55,99 @@ document.addEventListener('DOMContentLoaded', function() {
     function startAutoSlide() {
       clearInterval(slideInterval);
       slideInterval = setInterval(() => {
-        nextSlide();
+        if (!isTransitioning) { // Only proceed if not transitioning
+          nextSlide();
+        }
       }, 5000);
     }
 
-    slidesContainer.addEventListener('transitionend', () => {
-      // Looping seamless
-      if (currentIndex === 0) {
-        currentIndex = slideImages.length - 2;
-        goToSlide(currentIndex, false);
-      } else if (currentIndex === slideImages.length - 1) {
-        currentIndex = 1;
-        goToSlide(currentIndex, false);
-      }
+    // Handle transition end - with debouncing
+    let transitionTimeout;
+    slidesContainer.addEventListener('transitionend', (e) => {
+      if (e.target !== slidesContainer || e.propertyName !== 'transform') return;
+      
+      clearTimeout(transitionTimeout);
+      transitionTimeout = setTimeout(() => {
+        isTransitioning = false;
+        
+        if (currentIndex === 0) {
+          currentIndex = slideImages.length - 2;
+          goToSlide(currentIndex, false);
+        } else if (currentIndex === slideImages.length - 1) {
+          currentIndex = 1;
+          goToSlide(currentIndex, false);
+        }
+      }, 50);
     });
 
+    // Handle window resize
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-      slideWidth = slideImages[0].clientWidth;
-      goToSlide(currentIndex, false);
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        slideWidth = slideImages[0].clientWidth;
+        goToSlide(currentIndex, false);
+      }, 100);
     });
 
+    // Initialize slider only if we have enough slides
     if (slideImages.length >= 3) {
+      // Set initial position without animation
       goToSlide(currentIndex, false);
-      startAutoSlide();
+      
+      // Add error handling for images
+      slideImages.forEach((img, index) => {
+        img.addEventListener('error', () => {
+          console.warn(`Slide image ${index} failed to load:`, img.src);
+          // You can add a placeholder image here if needed
+          // img.src = 'assets/placeholder.jpg';
+        });
+        
+        // Ensure image is loaded before starting
+        if (img.complete) {
+          if (index === slideImages.length - 1) {
+            // All images processed, start auto slide
+            setTimeout(startAutoSlide, 100);
+          }
+        } else {
+          img.addEventListener('load', () => {
+            if (index === slideImages.length - 1) {
+              // Last image loaded, start auto slide
+              setTimeout(startAutoSlide, 100);
+            }
+          });
+        }
+      });
+      
+      // Fallback: start auto slide after 2 seconds regardless
+      setTimeout(() => {
+        if (!slideInterval) {
+          startAutoSlide();
+        }
+      }, 2000);
     }
 
+    // Pause on hover (optional enhancement)
+    if (slidesContainer) {
+      slidesContainer.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+      });
+      
+      slidesContainer.addEventListener('mouseleave', () => {
+        if (!isTransitioning) {
+          startAutoSlide();
+        }
+      });
+    }
+
+    // Visibility change handling (pause when tab is not active)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearInterval(slideInterval);
+      } else if (!isTransitioning) {
+        startAutoSlide();
+      }
+    });
     // ======== SERVICES POPUP MODAL ========
     const serviceDetails = [
       {
