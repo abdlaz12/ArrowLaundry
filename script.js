@@ -9,15 +9,37 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   
-    // ======== HERO SLIDER INFINITE - FIXED VERSION ========
+    // ======== HERO SLIDER INFINITE WITH DOTS - ENHANCED VERSION ========
     const slidesContainer = document.querySelector('.slides');
     const slideImages = document.querySelectorAll('.slides .slide');
     const progressBar = document.getElementById('progress-bar');
+    const dots = document.querySelectorAll('.dots label');
 
     let currentIndex = 1; // karena kita mulai dari slide kedua (asli pertama)
     let slideInterval;
     let slideWidth = slideImages[0].clientWidth;
     let isTransitioning = false; // Prevent multiple transitions
+    const totalRealSlides = 3; // Jumlah slide asli (tanpa clone)
+
+    function updateDots() {
+      // Remove active class from all dots
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Calculate which real slide we're on (1-3 maps to 0-2 for dots)
+      let realSlideIndex;
+      if (currentIndex === 0) {
+        realSlideIndex = 2; // Clone of last slide = last real slide
+      } else if (currentIndex === slideImages.length - 1) {
+        realSlideIndex = 0; // Clone of first slide = first real slide
+      } else {
+        realSlideIndex = currentIndex - 1; // Adjust for the first clone
+      }
+      
+      // Add active class to corresponding dot
+      if (dots[realSlideIndex]) {
+        dots[realSlideIndex].classList.add('active');
+      }
+    }
 
     function goToSlide(index, animate = true) {
       if (isTransitioning && animate) return;
@@ -30,10 +52,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       slidesContainer.style.transform = `translateX(-${index * slideWidth}px)`;
+      updateDots();
       
       if (!animate) {
         isTransitioning = false;
       }
+    }
+
+    function goToRealSlide(realIndex) {
+      // Convert real slide index (0-2) to actual slide index (1-3)
+      const targetIndex = realIndex + 1;
+      currentIndex = targetIndex;
+      goToSlide(currentIndex);
+      resetProgressBar();
+      restartAutoSlide();
     }
 
     function nextSlide() {
@@ -61,6 +93,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 5000);
     }
 
+    function restartAutoSlide() {
+      clearInterval(slideInterval);
+      setTimeout(() => {
+        startAutoSlide();
+      }, 100);
+    }
+
     // Handle transition end - with debouncing
     let transitionTimeout;
     slidesContainer.addEventListener('transitionend', (e) => {
@@ -78,6 +117,16 @@ document.addEventListener('DOMContentLoaded', function() {
           goToSlide(currentIndex, false);
         }
       }, 50);
+    });
+
+    // Add click event listeners to dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToRealSlide(index);
+      });
+      
+      // Add cursor pointer style
+      dot.style.cursor = 'pointer';
     });
 
     // Handle window resize
@@ -99,8 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
       slideImages.forEach((img, index) => {
         img.addEventListener('error', () => {
           console.warn(`Slide image ${index} failed to load:`, img.src);
-          // You can add a placeholder image here if needed
-          // img.src = 'assets/placeholder.jpg';
         });
         
         // Ensure image is loaded before starting
@@ -127,19 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 2000);
     }
 
-    // Pause on hover (optional enhancement)
-    if (slidesContainer) {
-      slidesContainer.addEventListener('mouseenter', () => {
-        clearInterval(slideInterval);
-      });
-      
-      slidesContainer.addEventListener('mouseleave', () => {
-        if (!isTransitioning) {
-          startAutoSlide();
-        }
-      });
-    }
-
     // Visibility change handling (pause when tab is not active)
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
@@ -148,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
         startAutoSlide();
       }
     });
+
     // ======== SERVICES POPUP MODAL ========
     const serviceDetails = [
       {
@@ -414,96 +449,99 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
     });
-// ======== TESTIMONIAL SLIDER MANUAL + AUTO SCROLL ========
-const testimonialSlider = document.getElementById('testimonial-slider');
-let isDraggingTesti = false;
-let startXTesti, scrollLeftTesti;
-let testiAutoScrollInterval;
 
-if (testimonialSlider) {
-  // Manual drag mouse
-  testimonialSlider.addEventListener('mousedown', (e) => {
-    isDraggingTesti = true;
-    startXTesti = e.pageX - testimonialSlider.offsetLeft;
-    scrollLeftTesti = testimonialSlider.scrollLeft;
-    clearInterval(testiAutoScrollInterval);
-  });
+    // ======== TESTIMONIAL SLIDER MANUAL + AUTO SCROLL ========
+    const testimonialSlider = document.getElementById('testimonial-slider');
+    let isDraggingTesti = false;
+    let startXTesti, scrollLeftTesti;
+    let testiAutoScrollInterval;
 
-  testimonialSlider.addEventListener('mouseleave', () => {
-    isDraggingTesti = false;
-    startAutoScrollTestimonial();
-  });
-
-  testimonialSlider.addEventListener('mouseup', () => {
-    isDraggingTesti = false;
-    startAutoScrollTestimonial();
-  });
-
-  testimonialSlider.addEventListener('mousemove', (e) => {
-    if (!isDraggingTesti) return;
-    e.preventDefault();
-    const x = e.pageX - testimonialSlider.offsetLeft;
-    const walk = (x - startXTesti) * 2;
-    testimonialSlider.scrollLeft = scrollLeftTesti - walk;
-  });
-
-  // Touch (mobile)
-  testimonialSlider.addEventListener('touchstart', (e) => {
-    isDraggingTesti = true;
-    startXTesti = e.touches[0].pageX - testimonialSlider.offsetLeft;
-    scrollLeftTesti = testimonialSlider.scrollLeft;
-    clearInterval(testiAutoScrollInterval);
-  });
-
-  testimonialSlider.addEventListener('touchend', () => {
-    isDraggingTesti = false;
-    startAutoScrollTestimonial();
-  });
-
-  testimonialSlider.addEventListener('touchmove', (e) => {
-    if (!isDraggingTesti) return;
-    const x = e.touches[0].pageX - testimonialSlider.offsetLeft;
-    const walk = (x - startXTesti) * 2;
-    testimonialSlider.scrollLeft = scrollLeftTesti - walk;
-  });
-
-  // Auto scroll testimonial
-  function startAutoScrollTestimonial() {
-    clearInterval(testiAutoScrollInterval);
-    testiAutoScrollInterval = setInterval(() => {
-      testimonialSlider.scrollLeft += 320;
-
-      if (testimonialSlider.scrollLeft >= testimonialSlider.scrollWidth - testimonialSlider.clientWidth - 10) {
-        testimonialSlider.scrollLeft = 0;
-      }
-    }, 4000);
-  }
-
-  startAutoScrollTestimonial();
-}
-emailjs.init("ED_If7aLg-65o9uvo"); // PUBLIC KEY kamu
-
-const subscribeForm = document.getElementById('subscribe-form');
-if (subscribeForm) {
-  subscribeForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    emailjs.sendForm('service_wwud6ct', 'template_tv2dtt9', this)
-      .then(() => {
-        console.log("✅ Email sent successfully.");
-        const statusEl = document.getElementById('subscribe-status');
-        statusEl.innerText = "✅ Check your inbox! We sent you a confirmation.";
-        statusEl.classList.remove('subscribe-error');
-        statusEl.classList.add('subscribe-success');
-      }, (error) => {
-        console.error("❌ Email send error:", error);
-        const statusEl = document.getElementById('subscribe-status');
-        statusEl.innerText = "❌ Failed to send email: " + error.text;
-        statusEl.classList.remove('subscribe-success');
-        statusEl.classList.add('subscribe-error');
+    if (testimonialSlider) {
+      // Manual drag mouse
+      testimonialSlider.addEventListener('mousedown', (e) => {
+        isDraggingTesti = true;
+        startXTesti = e.pageX - testimonialSlider.offsetLeft;
+        scrollLeftTesti = testimonialSlider.scrollLeft;
+        clearInterval(testiAutoScrollInterval);
       });
 
-    this.reset();
-  });
-}
-})
+      testimonialSlider.addEventListener('mouseleave', () => {
+        isDraggingTesti = false;
+        startAutoScrollTestimonial();
+      });
+
+      testimonialSlider.addEventListener('mouseup', () => {
+        isDraggingTesti = false;
+        startAutoScrollTestimonial();
+      });
+
+      testimonialSlider.addEventListener('mousemove', (e) => {
+        if (!isDraggingTesti) return;
+        e.preventDefault();
+        const x = e.pageX - testimonialSlider.offsetLeft;
+        const walk = (x - startXTesti) * 2;
+        testimonialSlider.scrollLeft = scrollLeftTesti - walk;
+      });
+
+      // Touch (mobile)
+      testimonialSlider.addEventListener('touchstart', (e) => {
+        isDraggingTesti = true;
+        startXTesti = e.touches[0].pageX - testimonialSlider.offsetLeft;
+        scrollLeftTesti = testimonialSlider.scrollLeft;
+        clearInterval(testiAutoScrollInterval);
+      });
+
+      testimonialSlider.addEventListener('touchend', () => {
+        isDraggingTesti = false;
+        startAutoScrollTestimonial();
+      });
+
+      testimonialSlider.addEventListener('touchmove', (e) => {
+        if (!isDraggingTesti) return;
+        const x = e.touches[0].pageX - testimonialSlider.offsetLeft;
+        const walk = (x - startXTesti) * 2;
+        testimonialSlider.scrollLeft = scrollLeftTesti - walk;
+      });
+
+      // Auto scroll testimonial
+      function startAutoScrollTestimonial() {
+        clearInterval(testiAutoScrollInterval);
+        testiAutoScrollInterval = setInterval(() => {
+          testimonialSlider.scrollLeft += 320;
+
+          if (testimonialSlider.scrollLeft >= testimonialSlider.scrollWidth - testimonialSlider.clientWidth - 10) {
+            testimonialSlider.scrollLeft = 0;
+          }
+        }, 4000);
+      }
+
+      startAutoScrollTestimonial();
+    }
+
+    // ======== EMAIL SUBSCRIPTION ========
+    emailjs.init("ED_If7aLg-65o9uvo"); // PUBLIC KEY kamu
+
+    const subscribeForm = document.getElementById('subscribe-form');
+    if (subscribeForm) {
+      subscribeForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        emailjs.sendForm('service_wwud6ct', 'template_tv2dtt9', this)
+          .then(() => {
+            console.log("✅ Email sent successfully.");
+            const statusEl = document.getElementById('subscribe-status');
+            statusEl.innerText = "✅ Check your inbox! We sent you a confirmation.";
+            statusEl.classList.remove('subscribe-error');
+            statusEl.classList.add('subscribe-success');
+          }, (error) => {
+            console.error("❌ Email send error:", error);
+            const statusEl = document.getElementById('subscribe-status');
+            statusEl.innerText = "❌ Failed to send email: " + error.text;
+            statusEl.classList.remove('subscribe-success');
+            statusEl.classList.add('subscribe-error');
+          });
+
+        this.reset();
+      });
+    }
+});

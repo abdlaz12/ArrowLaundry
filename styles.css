@@ -135,6 +135,31 @@ img {
   animation: fill 5s linear forwards;
 }
 
+/* Slide navigation with dots */
+.dots {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.dots label {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dots label:hover {
+  background-color: #34e108;
+}
+
 @keyframes fill {
   from { width: 0%; }
   to { width: 100%; }
