@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
       {
         title: "CARPET CLEANING",
         description: "Our professional carpet cleaning service removes deep-set dirt, stains, and allergens, leaving your carpets fresh and revitalized. We use eco-friendly cleaning solutions and state-of-the-art equipment to ensure the best results while extending the life of your carpets.",
-        image: "assets/slider/pohon.jpg"
+        image: "assets/slider/slider_1.png"
       },
       {
         title: "POOL CLEANING",
