@@ -186,45 +186,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // ======== SERVICES POPUP MODAL ========
     const serviceDetails = [
       {
-        title: "CARPET CLEANING",
+        title: "LAUNDRY CLEANING",
         description: "Our professional carpet cleaning service removes deep-set dirt, stains, and allergens, leaving your carpets fresh and revitalized. We use eco-friendly cleaning solutions and state-of-the-art equipment to ensure the best results while extending the life of your carpets.",
-        image: "assets/slider/slider_1.png"
+        image: "https://abdlaz12.github.io/ArrowAsset/Img/services_1.png"
       },
       {
-        title: "POOL CLEANING",
+        title: "SPECIALIST CLEANING",
         description: "Keep your pool crystal clear and safe with our comprehensive pool cleaning service. Our technicians handle everything from water testing and chemical balancing to debris removal and equipment maintenance. Enjoy your pool without the hassle of maintaining it yourself.",
-        image: "assets/slider/pohon.jpg"
+        image: "https://abdlaz12.github.io/ArrowAsset/Img/services_2.png"
       },
       {
-        title: "CARPET CLEANING",
+        title: "BAG CLEANING",
         description: "Our professional carpet cleaning service removes deep-set dirt, stains, and allergens, leaving your carpets fresh and revitalized. We use eco-friendly cleaning solutions and state-of-the-art equipment to ensure the best results while extending the life of your carpets.",
-        image: "assets/slider/pohon.jpg"
+        image: "https://abdlaz12.github.io/ArrowAsset/Img/services_3.png"
       },
-      {
-        title: "POOL CLEANING",
-        description: "Keep your pool crystal clear and safe with our comprehensive pool cleaning service. Our technicians handle everything from water testing and chemical balancing to debris removal and equipment maintenance. Enjoy your pool without the hassle of maintaining it yourself.",
-        image: "assets/slider/pohon.jpg"
-      },
-      {
-        title: "CARPET CLEANING",
-        description: "Our professional carpet cleaning service removes deep-set dirt, stains, and allergens, leaving your carpets fresh and revitalized. We use eco-friendly cleaning solutions and state-of-the-art equipment to ensure the best results while extending the life of your carpets.",
-        image: "assets/slider/pohon.jpg"
-      },
-      {
-        title: "POOL CLEANING",
-        description: "Keep your pool crystal clear and safe with our comprehensive pool cleaning service. Our technicians handle everything from water testing and chemical balancing to debris removal and equipment maintenance. Enjoy your pool without the hassle of maintaining it yourself.",
-        image: "assets/slider/pohon.jpg"
-      },
-      {
-        title: "CARPET CLEANING",
-        description: "Our professional carpet cleaning service removes deep-set dirt, stains, and allergens, leaving your carpets fresh and revitalized. We use eco-friendly cleaning solutions and state-of-the-art equipment to ensure the best results while extending the life of your carpets.",
-        image: "assets/slider/pohon.jpg"
-      },
-      {
-        title: "POOL CLEANING",
-        description: "Keep your pool crystal clear and safe with our comprehensive pool cleaning service. Our technicians handle everything from water testing and chemical balancing to debris removal and equipment maintenance. Enjoy your pool without the hassle of maintaining it yourself.",
-        image: "assets/slider/pohon.jpg"
-      }
+
     ];
   
     // Create the modal element
